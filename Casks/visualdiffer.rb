@@ -12,6 +12,11 @@ cask "visualdiffer" do
   app "VisualDiffer.app"
   binary "#{appdir}/VisualDiffer.app/Contents/Helpers/visdiff"
 
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/VisualDiffer.app"]
+  end
+
   zap trash: [
     "~/Library/Application Support/com.visualdiffer",
     "~/Library/Preferences/com.visualdiffer.plist",
